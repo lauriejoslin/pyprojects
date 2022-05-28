@@ -1,6 +1,7 @@
 #Credit to 3blue1brown!!
 import numpy as np
 import matplotlib.pyplot as plt
+import sys
 
 #Constants
 g = 9.8
@@ -29,11 +30,15 @@ def theta(t):
         z+=1
     return theta
 
-theta(1000)
+try:
+   a = int(input("Please enter the amount of turns: "))
+except ValueError:
+   print("\nPlease only use integers")
+theta(a)
 fig, ax = plt.subplots(figsize=(19.2,10.8))
 ax.plot(x, y)
-ax.set_xlabel('theta')
-ax.set_ylabel('theta_dot')
-ax.set_title('ODE')
+ax.set_xlabel('angular displacement')
+ax.set_ylabel('angular velocity')
+ax.set_title('ODE computing pendulum motion considering air resistance')
 fig.set_facecolor('lightsteelblue')
-plt.savefig('f.png')
+plt.savefig('ODE.png')
