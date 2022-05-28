@@ -7,8 +7,8 @@ import sys
 g = 9.8
 L = 2
 mu = 0.1
-theta_0 = np.pi /3
-theta_dot_0 = 0
+theta_0 = np.pi /2
+theta_dot_0 = 4
 x = []
 y = []
 
@@ -37,8 +37,8 @@ except ValueError:
 theta(a)
 fig, ax = plt.subplots(figsize=(19.2,10.8))
 ax.plot(x, y)
-ax.set_xlabel('angular displacement')
-ax.set_ylabel('angular velocity')
+ax.set_xlabel('angular displacement / rad')
+ax.set_ylabel('angular velocity / rad s^-1')
 ax.set_title('ODE computing pendulum motion considering air resistance')
 fig.set_facecolor('lightsteelblue')
 plt.savefig('ODE.png')
