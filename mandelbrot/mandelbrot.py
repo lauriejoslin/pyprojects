@@ -1,23 +1,22 @@
 #credit to https://realpython.com/mandelbrot-set-python/
 
-import numpy as np
-import matplotlib.pyplot as plt
-np.warnings.filterwarnings("ignore")
- 
-def complex_matrix(xmin, xmax, ymin, ymax, pixel_density):
-    re = np.linspace(xmin, xmax, int((xmax - xmin) * pixel_density))
-    im = np.linspace(ymin, ymax, int((ymax - ymin) * pixel_density))
-    return re[np.newaxis, :] + im[:, np.newaxis] * 1j
+from dataclasses import dataclass
 
-def is_stable(c, num_iterations):
-    z = 0
-    for i in range(num_iterations):
-        z = z ** 2 + c
-    return abs(z) <= 2
+@dataclass
+class MandelbrotSet:
+    max_iterations: int
 
-c = complex_matrix(-2, 0.5, -1.5, 1.5, pixel_density=512)
-plt.imshow(is_stable(c, num_iterations=20), cmap="binary")
-plt.gca().set_aspect("equal")
-plt.axis("off")
-plt.tight_layout()
-plt.savefig('mandelbrot.png')
+    def stability(self, c: complex) -> float:
+        return self.escape_count(c) / self.max_iterations
+
+    def escape_count(self, c: complex) -> int:
+        z = 0
+        for iteration in range(self.max_iterations):
+            z = z ** 2 + c
+            if abs(z) > 2:
+                return iteration
+        return self.max_iterations
+    
+    def __contains__(self, c: complex) -> bool:
+        return self.stability(c) == 1
+
