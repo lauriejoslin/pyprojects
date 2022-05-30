@@ -1,16 +1,13 @@
 from mandelbrot import MandelbrotSet
 from PIL import Image
+from viewport import Viewport
 
-mandelbrot_set = MandelbrotSet(max_iterations=30)
+mandelbrot_set = MandelbrotSet(max_iterations=256, escape_radius=1000)
 
-width, height = 512, 512
-scale = 0.0075
-GRAYSCALE = "L"
+image = Image.new(mode="L", size=(512, 512))
+for pixel in Viewport(image, center=-0.7435 + 0.1314j, width=0.002):
+   c = complex(pixel)
+   instability = 1 - mandelbrot_set.stability(c, smooth=True)
+   pixel.color = int(instability * 255)
 
-image = Image.new(mode=GRAYSCALE, size=(width, height))
-for y in range(height):
-    for x in range(width):
-        c = scale * complex(x - width / 2, height / 2 - y)
-        instability = 1 - mandelbrot_set.stability(c)
-        image.putpixel((x, y), int(instability * 255))
 image.show()
