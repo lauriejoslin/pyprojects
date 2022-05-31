@@ -69,7 +69,7 @@ def partition(array):
         return None
 
 
-test = [1, 3, 7, 33, 9, 8, 5, 2]
+test = [6, 3, 4, 8, 11, 21]
 partition(test)
 print(x)
 
