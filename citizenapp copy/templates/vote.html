@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+
+<html lang="en">
+    <head>
+        <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@500&display=swap" rel="stylesheet">
+        <link href="/static/styles.css" rel="stylesheet">
+        <title>Citizen</title>
+    </head>
+    <body>
+        <div class="header">
+            <h1>citizen</h1>
+        </div>
+        <div class="container">
+            <div class="section">
+
+                <h2>Vote on a topic</h2>
+                <form action="/" method="POST">
+                    <input autofocus name="name" placeholder="Name">
+                    <input type="radio" name="opinion" id="sdgr" value="Strongly Disagree">
+                    <label for="sdgr">Strongly Disagree</label>
+                    <input type="radio" name="opinion" id="dgr"  value="Disagree">
+                    <label for="dgr">Disagree</label>
+                    <input type="radio" name="opinion" id="ntl" value="Neutral">
+                    <label for="ntl">Neutral</label>
+                    <input type="radio" name="opinion" id="agr"  value="Agree">
+                    <label for="agr">Agree</label>
+                    <input type="radio" name="opinion" id="sagr" value="Strongly Agree">
+                    <label for="sagr">Strongly Agree</label>
+                    <input type="submit" value="Vote">
+                </form>
+
+            </div>
+
+            <div class="section">
+
+                <h2>Current votes:</h2>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Name</th>
+                            <th>Opinion</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for vote in votes %}
+                        <tr>
+                            <td> {{ vote["firstname"] }}</td>
+                            <td> {{ vote["opinion"]}} </td>
+                        </tr>
+                        {%  endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </body>
+</html>
